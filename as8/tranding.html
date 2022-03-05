@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+body{
+    background-color: rgb(71, 68, 68);
+}
+#nav{
+    height: 50px;
+    background-color: rgb(248, 97, 97);
+    display: grid;
+    grid-template-columns: 45% 15% 15% 15%;
+}
+#nav>div{
+    margin-top: 10px;
+    padding:  1px 12px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+#con{
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 17% 17% 17% 17%;
+    grid-template-rows: 280px;
+    border: 1px solid none;
+    justify-content: space-around;
+    gap: 20px;
+    
+}
+
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <div>MOVIE </div>
+        <div><a style="text-decoration: none; color: black;" href="index.html">Home</a></div>
+      
+        <div>Login</div>
+        <div><a style="text-decoration: none; color: black;"  href="tranding.html">Tranding</a></div>
+        </div>
+    
+            <div id="con">
+
+            </div>
+</body>
+</html>
+<script>
+
+var url="http://www.omdbapi.com/?apikey=d806bd70&s=avengers";
+async function show(){
+    try{
+let res=await fetch(url);
+let data=await res.json();
+data=data.Search;
+appenddata(data);
+    }
+    catch(err){
+     console.log(err);
+    }
+}
+
+function appenddata(data){
+console.log(data);
+
+data.map((ele)=>{
+
+var div1=document.createElement("div")
+div1.style.border="1px solid grey"
+div1.style.textAlign="center"
+div1.style.color="black";
+div1.style.fontWeight="bolder";
+
+
+var image=document.createElement("img")
+image.setAttribute("src",ele.Poster)
+image.style.height="60%";
+image.style.width="100%";
+
+var p1=document.createElement("p")
+p1.textContent=ele.Title;
+
+var p2=document.createElement("p")
+p2.textContent=ele.Year;
+
+div1.append(image,p1,p2)
+document.querySelector("#con").append(div1);
+})
+
+}
+show();
+
+</script>
